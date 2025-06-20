@@ -26,7 +26,4 @@ public class User {
     private String phone;
 
     private String password;
-
-    @OneToMany
-    private Address address;
 }
