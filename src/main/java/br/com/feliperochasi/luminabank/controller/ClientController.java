@@ -1,0 +1,30 @@
+package br.com.feliperochasi.luminabank.controller;
+
+import br.com.feliperochasi.luminabank.dto.ClientRegisterDTO;
+import br.com.feliperochasi.luminabank.service.ClientService;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/clients")
+public class ClientController {
+
+    @Autowired
+    private ClientService clientService;
+
+    @GetMapping
+    public void listUser() {
+        System.out.println("Request");
+    }
+
+    @PostMapping
+    @Transactional
+    public ResponseEntity createUser(@RequestBody @Valid ClientRegisterDTO dto) {
+        this.clientService.createUser(dto);
+        return ResponseEntity.ok().build();
+    }
+
+}
