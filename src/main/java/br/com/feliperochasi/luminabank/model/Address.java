@@ -32,5 +32,5 @@ public class Address {
     private String city;
 
     @ManyToOne
-    private User user;
+    private Client client;
 }
