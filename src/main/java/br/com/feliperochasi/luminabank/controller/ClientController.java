@@ -1,5 +1,6 @@
 package br.com.feliperochasi.luminabank.controller;
 
+import br.com.feliperochasi.luminabank.dto.AddressRegisterDTO;
 import br.com.feliperochasi.luminabank.dto.ClientRegisterDTO;
 import br.com.feliperochasi.luminabank.service.ClientService;
 import jakarta.transaction.Transactional;
@@ -27,4 +28,10 @@ public class ClientController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/address")
+    @Transactional
+    public ResponseEntity createAddressForClient(@RequestBody @Valid AddressRegisterDTO dto) {
+        this.clientService.createAddressForClient(dto);
+        return ResponseEntity.ok().build();
+    }
 }

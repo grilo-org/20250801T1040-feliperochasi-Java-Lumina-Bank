@@ -1,6 +1,7 @@
 package br.com.feliperochasi.luminabank.model;
 
 
+import br.com.feliperochasi.luminabank.dto.AddressRegisterDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,4 +34,15 @@ public class Address {
 
     @ManyToOne
     private Client client;
+
+    public Address(AddressRegisterDTO dto, Client clientForAddress) {
+        this.address = dto.address();
+        this.neighborhood = dto.neighborhood();
+        this.zipcode = dto.zipCode();
+        this.complement = dto.complement().isEmpty() ? "" : dto.complement();
+        this.number = dto.number().isEmpty() ? "" : dto.number();
+        this.uf = dto.uf();
+        this.city = dto.city();
+        this.client = clientForAddress;
+    }
 }
