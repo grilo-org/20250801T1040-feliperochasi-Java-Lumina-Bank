@@ -2,6 +2,7 @@ package br.com.feliperochasi.luminabank.service;
 
 import br.com.feliperochasi.luminabank.dto.AddressRegisterDTO;
 import br.com.feliperochasi.luminabank.dto.ClientRegisterDTO;
+import br.com.feliperochasi.luminabank.dto.ClientUpdateDTO;
 import br.com.feliperochasi.luminabank.model.Address;
 import br.com.feliperochasi.luminabank.model.Client;
 import br.com.feliperochasi.luminabank.repository.AddressRepository;
@@ -27,5 +28,10 @@ public class ClientService {
         Client clientForAddress = clientRepository.getReferenceById(dto.clientId());
         Address newAddress = new Address(dto, clientForAddress);
         addressRepository.save(newAddress);
+    }
+
+    public void updateClient(ClientUpdateDTO dto) {
+        Client clientForUpdate = clientRepository.getReferenceById(dto.clientId());
+        clientForUpdate.updateInfoClient(dto);
     }
 }

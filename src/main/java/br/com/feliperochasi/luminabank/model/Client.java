@@ -1,6 +1,7 @@
 package br.com.feliperochasi.luminabank.model;
 
 import br.com.feliperochasi.luminabank.dto.ClientRegisterDTO;
+import br.com.feliperochasi.luminabank.dto.ClientUpdateDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,5 +48,21 @@ public class Client {
         this.created_at = LocalDateTime.now();
         this.updated_at = LocalDateTime.now();
         this.active = 1;
+    }
+
+    public void updateInfoClient(ClientUpdateDTO dto) {
+        if (dto.name() != null) {
+            this.name = dto.name();
+        }
+
+        if (dto.email() != null) {
+            this.email = dto.email();
+        }
+
+        if (dto.phone() != null) {
+            this.phone = dto.phone();
+        }
+
+        this.updated_at = LocalDateTime.now();
     }
 }
