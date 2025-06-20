@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record ClientRegisterDTO(
         @NotBlank
@@ -19,6 +19,6 @@ public record ClientRegisterDTO(
         @NotBlank
         String phone,
         @NotNull
-        LocalDateTime birthday
+        LocalDate birthday
 ) {
 }
