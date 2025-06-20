@@ -1,4 +1,4 @@
-package br.com.feliperochasi.luminabank.domain;
+package br.com.feliperochasi.luminabank.model;
 
 
 import jakarta.persistence.*;
