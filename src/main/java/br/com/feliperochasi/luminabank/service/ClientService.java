@@ -12,8 +12,8 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-    public void createUser(ClientRegisterDTO dto) {
-        Client newUser = new Client(dto);
-        clientRepository.save(newUser);
+    public void createClient(ClientRegisterDTO dto) {
+        Client newClient = new Client(dto);
+        clientRepository.save(newClient);
     }
 }

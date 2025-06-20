@@ -16,14 +16,14 @@ public class ClientController {
     private ClientService clientService;
 
     @GetMapping
-    public void listUser() {
+    public void listClient() {
         System.out.println("Request");
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity createUser(@RequestBody @Valid ClientRegisterDTO dto) {
-        this.clientService.createUser(dto);
+    public ResponseEntity createClient(@RequestBody @Valid ClientRegisterDTO dto) {
+        this.clientService.createClient(dto);
         return ResponseEntity.ok().build();
     }
 
