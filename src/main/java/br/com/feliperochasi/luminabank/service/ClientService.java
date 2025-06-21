@@ -1,24 +1,31 @@
 package br.com.feliperochasi.luminabank.service;
 
-import br.com.feliperochasi.luminabank.dto.AddressRegisterDTO;
-import br.com.feliperochasi.luminabank.dto.AddressUpdateClient;
-import br.com.feliperochasi.luminabank.dto.ClientRegisterDTO;
-import br.com.feliperochasi.luminabank.dto.ClientUpdateDTO;
+import br.com.feliperochasi.luminabank.dto.*;
 import br.com.feliperochasi.luminabank.model.Address;
 import br.com.feliperochasi.luminabank.model.Client;
 import br.com.feliperochasi.luminabank.repository.AddressRepository;
 import br.com.feliperochasi.luminabank.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ClientService {
+
+    private final static Long ACTIVE_USER = 1L;
 
     @Autowired
     private ClientRepository clientRepository;
 
     @Autowired
     private AddressRepository addressRepository;
+
+    public List<DetailsClientDTO> findAllClients() {
+        List<Client> listOfClientsActive = clientRepository.findAllByActiveEquals(ACTIVE_USER);
+        return listOfClientsActive.stream().map(DetailsClientDTO::new).toList();
+    }
 
     public void createClient(ClientRegisterDTO dto) {
         Client newClient = new Client(dto);

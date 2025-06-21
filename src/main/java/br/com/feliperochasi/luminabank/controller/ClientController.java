@@ -1,15 +1,14 @@
 package br.com.feliperochasi.luminabank.controller;
 
-import br.com.feliperochasi.luminabank.dto.AddressRegisterDTO;
-import br.com.feliperochasi.luminabank.dto.AddressUpdateClient;
-import br.com.feliperochasi.luminabank.dto.ClientRegisterDTO;
-import br.com.feliperochasi.luminabank.dto.ClientUpdateDTO;
+import br.com.feliperochasi.luminabank.dto.*;
 import br.com.feliperochasi.luminabank.service.ClientService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/clients")
@@ -19,8 +18,8 @@ public class ClientController {
     private ClientService clientService;
 
     @GetMapping
-    public void listClient() {
-        System.out.println("Request");
+    public ResponseEntity<List<DetailsClientDTO>> findAllClients() {
+        return ResponseEntity.ok(this.clientService.findAllClients());
     }
 
     @PostMapping
