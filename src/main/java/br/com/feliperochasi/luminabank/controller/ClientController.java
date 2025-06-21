@@ -50,4 +50,11 @@ public class ClientController {
         this.clientService.updateAddressOfClient(dto);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/address/{id}")
+    @Transactional
+    public ResponseEntity deleteAddressOfClient(@PathVariable Long id){
+        this.clientService.deleteAddress(id);
+        return ResponseEntity.noContent().build();
+    }
 }

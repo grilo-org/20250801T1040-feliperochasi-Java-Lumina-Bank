@@ -44,4 +44,8 @@ public class ClientService {
     private Client getClient(Long clientId) {
         return clientRepository.getReferenceById(clientId);
     }
+
+    public void deleteAddress(Long id) {
+        addressRepository.deleteById(id);
+    }
 }
