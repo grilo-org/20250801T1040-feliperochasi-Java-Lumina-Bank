@@ -1,6 +1,5 @@
 package br.com.feliperochasi.luminabank.dto;
 
-import br.com.feliperochasi.luminabank.model.Address;
 import br.com.feliperochasi.luminabank.model.Client;
 
 import java.util.List;
