@@ -27,6 +27,11 @@ public class ClientService {
         return listOfClientsActive.stream().map(DetailsClientDTO::new).toList();
     }
 
+    public DetailsClientDTO findClientById(Long clientId) {
+        Client clientForReturn = getClient(clientId);
+        return new DetailsClientDTO(clientForReturn);
+    }
+
     public void createClient(ClientRegisterDTO dto) {
         Client newClient = new Client(dto);
         clientRepository.save(newClient);

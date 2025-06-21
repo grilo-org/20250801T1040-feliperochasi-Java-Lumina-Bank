@@ -22,6 +22,11 @@ public class ClientController {
         return ResponseEntity.ok(this.clientService.findAllClients());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DetailsClientDTO> findClientById(@PathVariable Long id) {
+        return ResponseEntity.ok(this.clientService.findClientById(id));
+    }
+
     @PostMapping
     @Transactional
     public ResponseEntity createClient(@RequestBody @Valid ClientRegisterDTO dto) {
