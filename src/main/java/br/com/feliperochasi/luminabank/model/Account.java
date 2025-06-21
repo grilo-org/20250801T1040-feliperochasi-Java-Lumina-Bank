@@ -53,4 +53,9 @@ public class Account {
         this.created_at = LocalDateTime.now();
         this.updated_at = LocalDateTime.now();
     }
+
+    public void approveAccount() {
+        this.approved = 1;
+        this.updated_at = LocalDateTime.now();
+    }
 }
