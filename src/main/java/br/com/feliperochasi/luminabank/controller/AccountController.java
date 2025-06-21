@@ -28,4 +28,11 @@ public class AccountController {
         this.accountService.approveAccountClient(id);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity inativeAccountClient(@PathVariable Long id) {
+        this.accountService.inativeAccountClient(id);
+        return ResponseEntity.noContent().build();
+    }
 }

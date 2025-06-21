@@ -23,11 +23,8 @@ public class AccountService {
     @Autowired
     private ClientRepository clientRepository;
 
-    @Autowired
-    private QueryService queryService;
-
     public void createNewAccountForClient(AccountRegisterDTO dto) {
-        Client clientForRegisterNewAccount = queryService.getClient(dto.clientId());
+        Client clientForRegisterNewAccount = clientRepository.getReferenceById(dto.clientId());
 
         Long number;
         Integer digit;
@@ -43,6 +40,11 @@ public class AccountService {
     public void approveAccountClient(Long id) {
         Account accountForApprove = accountRepository.getReferenceById(id);
         accountForApprove.approveAccount();
+    }
+
+    public void inativeAccountClient(Long id) {
+        Account accountForInative = accountRepository.getReferenceById(id);
+        accountForInative.inativeAccount();
     }
 
     private Long generateAccountNumber() {

@@ -58,4 +58,10 @@ public class Account {
         this.approved = 1;
         this.updated_at = LocalDateTime.now();
     }
+
+    public void inativeAccount() {
+        this.active = 0;
+        this.approved = 0;
+        this.deleted_at = LocalDateTime.now();
+    }
 }
