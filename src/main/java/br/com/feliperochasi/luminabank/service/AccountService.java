@@ -14,7 +14,7 @@ import java.util.Random;
 public class AccountService {
 
     private static final Integer NUMBER_CHARACTERS_ACCOUNT = 11;
-    private static final Integer NUMBERS_TO_GET = 10;
+    private static final Integer NUMBERS_TO_GET = 9;
 
 
     @Autowired
@@ -51,6 +51,6 @@ public class AccountService {
 
     private Integer generateAccountDigit() {
         Random random = new Random();
-        return random.nextInt(NUMBERS_TO_GET);
+        return random.nextInt((NUMBERS_TO_GET) + 1);
     }
 }
