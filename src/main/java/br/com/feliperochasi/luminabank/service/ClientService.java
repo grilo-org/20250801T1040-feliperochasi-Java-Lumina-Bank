@@ -22,13 +22,16 @@ public class ClientService {
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private QueryService queryService;
+
     public List<DetailsClientDTO> findAllClients() {
         List<Client> listOfClientsActive = clientRepository.findAllByActiveEquals(ACTIVE_USER);
         return listOfClientsActive.stream().map(DetailsClientDTO::new).toList();
     }
 
     public DetailsClientDTO findClientById(Long clientId) {
-        Client clientForReturn = getClient(clientId);
+        Client clientForReturn = queryService.getClient(clientId);
         return new DetailsClientDTO(clientForReturn);
     }
 
@@ -38,13 +41,13 @@ public class ClientService {
     }
 
     public void createAddressForClient(AddressRegisterDTO dto) {
-        Client clientForAddress = getClient(dto.clientId());
+        Client clientForAddress = queryService.getClient(dto.clientId());
         Address newAddress = new Address(dto, clientForAddress);
         addressRepository.save(newAddress);
     }
 
     public void updateClient(ClientUpdateDTO dto) {
-        Client clientForUpdate = getClient(dto.clientId());
+        Client clientForUpdate = queryService.getClient(dto.clientId());
         clientForUpdate.updateInfoClient(dto);
     }
 
@@ -58,11 +61,7 @@ public class ClientService {
     }
 
     public void inativeClient(Long id) {
-        Client clientForInative = getClient(id);
+        Client clientForInative = queryService.getClient(id);
         clientForInative.inativeClient();
-    }
-
-    private Client getClient(Long clientId) {
-        return clientRepository.getReferenceById(clientId);
     }
 }
