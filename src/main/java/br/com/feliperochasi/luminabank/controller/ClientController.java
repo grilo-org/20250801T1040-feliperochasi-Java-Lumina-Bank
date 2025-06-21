@@ -1,6 +1,7 @@
 package br.com.feliperochasi.luminabank.controller;
 
 import br.com.feliperochasi.luminabank.dto.AddressRegisterDTO;
+import br.com.feliperochasi.luminabank.dto.AddressUpdateClient;
 import br.com.feliperochasi.luminabank.dto.ClientRegisterDTO;
 import br.com.feliperochasi.luminabank.dto.ClientUpdateDTO;
 import br.com.feliperochasi.luminabank.service.ClientService;
@@ -40,6 +41,13 @@ public class ClientController {
     @Transactional
     public ResponseEntity updateClient(@RequestBody @Valid ClientUpdateDTO dto) {
         this.clientService.updateClient(dto);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/address")
+    @Transactional
+    public ResponseEntity updateAddressOfClient(@RequestBody @Valid AddressUpdateClient dto) {
+        this.clientService.updateAddressOfClient(dto);
         return ResponseEntity.ok().build();
     }
 }
