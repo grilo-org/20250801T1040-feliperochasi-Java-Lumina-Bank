@@ -2,6 +2,7 @@ package br.com.feliperochasi.luminabank.model;
 
 import br.com.feliperochasi.luminabank.dto.ClientRegisterDTO;
 import br.com.feliperochasi.luminabank.dto.ClientUpdateDTO;
+import br.com.feliperochasi.luminabank.dto.DetailsAddressDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +10,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "clients")
@@ -38,6 +41,9 @@ public class Client {
     private LocalDateTime deleted_at;
 
     private int active;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Address> address;
 
     public Client(ClientRegisterDTO dto) {
         this.name = dto.name();
