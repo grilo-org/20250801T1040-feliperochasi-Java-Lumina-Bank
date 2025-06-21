@@ -57,4 +57,11 @@ public class ClientController {
         this.clientService.deleteAddress(id);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity inativeClient(@PathVariable Long id){
+        this.clientService.inativeClient(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -41,11 +41,16 @@ public class ClientService {
         addressForUpdate.updateInfoAddress(dto);
     }
 
-    private Client getClient(Long clientId) {
-        return clientRepository.getReferenceById(clientId);
-    }
-
     public void deleteAddress(Long id) {
         addressRepository.deleteById(id);
+    }
+
+    public void inativeClient(Long id) {
+        Client clientForInative = getClient(id);
+        clientForInative.inativeClient();
+    }
+
+    private Client getClient(Long clientId) {
+        return clientRepository.getReferenceById(clientId);
     }
 }

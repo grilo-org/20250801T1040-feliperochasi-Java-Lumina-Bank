@@ -65,4 +65,9 @@ public class Client {
 
         this.updated_at = LocalDateTime.now();
     }
+
+    public void inativeClient() {
+        this.active = 0;
+        this.deleted_at = LocalDateTime.now();
+    }
 }
