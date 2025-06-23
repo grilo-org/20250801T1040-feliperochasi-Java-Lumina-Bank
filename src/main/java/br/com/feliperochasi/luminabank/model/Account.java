@@ -1,6 +1,8 @@
 package br.com.feliperochasi.luminabank.model;
 
+import br.com.feliperochasi.luminabank.dto.BankMovementDTO;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -66,5 +68,21 @@ public class Account {
         this.active = 0;
         this.approved = 0;
         this.deleted_at = LocalDateTime.now();
+    }
+
+    public void pay(BankMovementDTO dto) {
+
+    }
+
+    public void deposit(BankMovementDTO dto) {
+        this.balance += dto.amount();
+    }
+
+    public void transfer(BankMovementDTO dto) {
+
+    }
+
+    public void withdrawal(BankMovementDTO dto) {
+        this.balance -= dto.amount();
     }
 }

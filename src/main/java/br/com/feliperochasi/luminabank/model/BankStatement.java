@@ -1,6 +1,8 @@
 package br.com.feliperochasi.luminabank.model;
 
+import br.com.feliperochasi.luminabank.dto.BankMovementDTO;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,8 +26,6 @@ public class BankStatement {
 
     private Float amount;
 
-    private Float balance;
-
     private String description;
 
     private String reference;
@@ -33,4 +33,19 @@ public class BankStatement {
     private LocalDateTime created_at;
 
     private LocalDateTime updated_at;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    public BankStatement(Account accountClientOperator, @Valid BankMovementDTO dto) {
+        this.account = accountClientOperator;
+        this.transaction_date = LocalDateTime.now();
+        this.transaction_type = dto.transactionType();
+        this.amount = dto.amount();
+        this.description = dto.description();
+        this.reference = dto.reference();
+        this.created_at = LocalDateTime.now();
+        this.updated_at = LocalDateTime.now();
+    }
 }
