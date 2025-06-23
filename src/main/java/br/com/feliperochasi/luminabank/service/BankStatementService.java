@@ -24,12 +24,18 @@ public class BankStatementService {
         switch (dto.transactionType()) {
             case PAY -> accountClientOperator.pay(dto);
             case DEPOSIT -> accountClientOperator.deposit(dto);
-            case TRANSFER -> accountClientOperator.transfer(dto);
+            case TRANSFER -> {
+                Account accountClientReciver = findAccountByNumber(dto.reciverNumber());
+                accountClientOperator.transfer(dto);
+                accountClientReciver.deposit(dto);
+                BankStatement operationReciver = new BankStatement(accountClientReciver, dto.transactionType(), "Transferencia recebida pelo sistema de conta interna", "Transferencia", dto.amount());
+                bankStatementRepository.save(operationReciver);
+            }
             case WITHDRAWAL -> accountClientOperator.withdrawal(dto);
             default -> throw new RuntimeException("Operacao invalida");
         }
         var amountToOperator = dto.transactionType() ==  TransactionType.DEPOSIT ? dto.amount() : dto.amount() * -1;
-        BankStatement newOperation = new BankStatement(accountClientOperator, dto, amountToOperator);
+        BankStatement newOperation = new BankStatement(accountClientOperator, dto.transactionType(), dto.description(), dto.reference(), amountToOperator);
         bankStatementRepository.save(newOperation);
     }
 

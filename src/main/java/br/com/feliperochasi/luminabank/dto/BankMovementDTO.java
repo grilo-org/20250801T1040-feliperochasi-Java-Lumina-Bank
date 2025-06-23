@@ -17,6 +17,8 @@ public record BankMovementDTO(
         @NotBlank
         String reference,
         @NotNull
-        Float amount
+        Float amount,
+        @JsonAlias("reciver_number")
+        Long reciverNumber
 ) {
 }

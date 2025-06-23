@@ -71,9 +71,7 @@ public class Account {
     }
 
     public void pay(BankMovementDTO dto) {
-        if(this.balance < dto.amount()) {
-            throw new RuntimeException("Saldo insuficiente");
-        }
+        checkHaveIsBalanceToOperation(dto.amount());
         this.balance -= dto.amount();
     }
 
@@ -82,13 +80,18 @@ public class Account {
     }
 
     public void transfer(BankMovementDTO dto) {
-
+        checkHaveIsBalanceToOperation(dto.amount());
+        this.balance -= dto.amount();
     }
 
     public void withdrawal(BankMovementDTO dto) {
-        if (this.balance < dto.amount()) {
+        checkHaveIsBalanceToOperation(dto.amount());
+        this.balance -= dto.amount();
+    }
+
+    private void checkHaveIsBalanceToOperation(Float amountOperation) {
+        if (this.balance < amountOperation) {
             throw new RuntimeException("Saldo insuficiente");
         }
-        this.balance -= dto.amount();
     }
 }
