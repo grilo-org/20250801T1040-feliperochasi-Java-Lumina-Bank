@@ -1,6 +1,7 @@
 package br.com.feliperochasi.luminabank.service;
 
 import br.com.feliperochasi.luminabank.dto.BankMovementDTO;
+import br.com.feliperochasi.luminabank.dto.DetailsBankStatementDTO;
 import br.com.feliperochasi.luminabank.model.Account;
 import br.com.feliperochasi.luminabank.model.BankStatement;
 import br.com.feliperochasi.luminabank.model.TransactionType;
@@ -9,6 +10,8 @@ import br.com.feliperochasi.luminabank.repository.BankStatementRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BankStatementService {
@@ -37,6 +40,12 @@ public class BankStatementService {
         var amountToOperator = dto.transactionType() ==  TransactionType.DEPOSIT ? dto.amount() : dto.amount() * -1;
         BankStatement newOperation = new BankStatement(accountClientOperator, dto.transactionType(), dto.description(), dto.reference(), amountToOperator);
         bankStatementRepository.save(newOperation);
+    }
+
+    public List<DetailsBankStatementDTO> listBankStatementByAccountNumber(Long numberAccount) {
+        Account accountToListBankStatement = findAccountByNumber(numberAccount);
+        List<BankStatement> bankStatementOfAccount = bankStatementRepository.findByAccountEquals(accountToListBankStatement);
+        return bankStatementOfAccount.stream().map(DetailsBankStatementDTO::new).toList();
     }
 
     private Account findAccountByNumber(Long number) {
