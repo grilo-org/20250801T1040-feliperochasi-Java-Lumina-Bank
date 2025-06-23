@@ -83,6 +83,8 @@ public class Account {
     }
 
     public void withdrawal(BankMovementDTO dto) {
-        this.balance -= dto.amount();
+        if (this.balance >= dto.amount()) {
+            this.balance -= dto.amount();
+        }
     }
 }
