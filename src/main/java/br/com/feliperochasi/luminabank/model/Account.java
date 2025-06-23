@@ -38,6 +38,8 @@ public class Account {
 
     private LocalDateTime deleted_at;
 
+    private Float balance;
+
     @ManyToOne()
     @JoinColumn(name = "client_id")
     private Client client;
@@ -50,6 +52,7 @@ public class Account {
         this.plan = PlanAccount.BASIC;
         this.approved = 0;
         this.active = 1;
+        this.balance = 0.0F;
         this.created_at = LocalDateTime.now();
         this.updated_at = LocalDateTime.now();
     }
