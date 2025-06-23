@@ -38,11 +38,11 @@ public class BankStatement {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    public BankStatement(Account accountClientOperator, @Valid BankMovementDTO dto) {
+    public BankStatement(Account accountClientOperator, @Valid BankMovementDTO dto, Float updatedAmount) {
         this.account = accountClientOperator;
         this.transaction_date = LocalDateTime.now();
         this.transaction_type = dto.transactionType();
-        this.amount = dto.amount();
+        this.amount = updatedAmount;
         this.description = dto.description();
         this.reference = dto.reference();
         this.created_at = LocalDateTime.now();
